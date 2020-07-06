@@ -9,7 +9,7 @@ Role Variables
 
 ```
 selinux_state: enforcing 
-``
+```
 
 Password Policy
 ```
