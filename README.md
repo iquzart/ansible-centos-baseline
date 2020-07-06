@@ -1,38 +1,74 @@
-Role Name
+Baseline Setup
 =========
 
-A brief description of the role goes here.
+Ansible role to setup OS baseline on RHEL based systems.
 
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```
+selinux_state: enforcing 
+``
 
-Dependencies
-------------
+Password Policy
+```
+PASS_MAX_DAYS: 60
+PASS_MIN_DAYS: 1
+PASS_MIN_LEN: 12
+PASS_WARN_AGE: 7
+minlen: 12
+minclass: 4 
+```
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Number of days to disable inactive account after password expiry
+```
+disable_inactive_account: 60
+```
 
-Example Playbook
-----------------
+PAM Settings
+```
+account_lockout_max_try: 5
+unlock_time: 900
+password_remember: 5
+```
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+SNMP Settings 
+```
+enable_snmp: true
+monitoring_host: 192.168.122.1
+snmp_string: My$cR3t$tr!ng
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+SSH Settings 
+```
+Port: 22
+MaxAuthTries: 4
+IgnoreRhosts: 'yes'
+HostbasedAuthentication: 'no'
+PermitRootLogin: 'yes'
+PermitEmptyPasswords: 'no'
+ClientAliveInterval: 300
+ClientAliveCountMax: 0
+LoginGraceTime: 1m
+Banner: /etc/issue.net
+AllowTcpForwarding: 'no'
+maxstartups: 10:30:60
+maxsessions: 4
+```
+
+MTA
+```
+enable_mta: true
+```
+
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Muhammed Iqbal <iquart@hotmail.com>
