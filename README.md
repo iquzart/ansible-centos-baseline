@@ -7,7 +7,11 @@ Ansible role to setup OS baseline on RHEL based systems.
 Role Variables
 --------------
 
+Basic Settings
 ```
+hostname: jenkins-server
+timezone: Asia/Dubai
+ntp_server: 1.ae.pool.ntp.org
 selinux_state: enforcing 
 ```
 
@@ -60,7 +64,14 @@ maxsessions: 4
 MTA
 ```
 enable_mta: true
+smtp_relay_host: smtp.domain.com
 ```
+
+Aliases
+```
+admin_mail_id: user@domain.com
+```
+
 
 
 License
