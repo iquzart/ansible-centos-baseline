@@ -3,6 +3,15 @@ Baseline Setup
 
 Ansible role to setup OS baseline on RHEL based systems.
 
+  1. Set Hostname
+  2. Set Timezone
+  3. configure date and time
+  4. SELinux
+  5. Password Policy
+  6. Harden SSH
+  7. Configure SNMP
+  8. Logging
+  
 
 Role Variables
 --------------
