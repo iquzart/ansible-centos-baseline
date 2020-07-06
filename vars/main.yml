@@ -1,0 +1,16 @@
+---
+# vars file for centos-baseline
+
+hostname: jenkins-server
+
+timezone: Asia/Dubai
+
+# NTP
+ntp_server: 1.ae.pool.ntp.org
+
+# Aliases 
+admin_mail_id: iquzart@hotmail.com
+
+# MTA
+smtp_relay_host: smtp.domain.com
+

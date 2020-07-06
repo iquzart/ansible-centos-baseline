@@ -1,0 +1,49 @@
+---
+- name: logs | Enable compression on log rotate
+  replace:  
+      path: /etc/logrotate.conf 
+      regexp: "^#compress"
+      replace: "compress"
+  tags: 
+    - logs
+    - baseline
+
+- name: logs | Create directory to store persistent journal
+  file:
+    path: /var/log/journal
+    state: directory
+  tags: 
+    - logs
+    - baseline
+  notify:
+        - restart journald
+
+- name: Audit | Enabling the service on boot 
+  service:
+    name: auditd
+    state: started
+    enabled: yes
+  tags: 
+    - logs
+    - baseline
+
+- name:  Audit | Configuring auditd.conf
+  template: 
+    src: auditd.conf.j2
+    dest: /etc/audit/auditd.conf
+    backup: yes
+  tags: 
+    - logs
+    - baseline
+
+- name: Audit | Generate audit.d/audit.rules
+  template:
+    src: audit.rules.j2
+    dest: /etc/audit/rules.d/audit.rules
+    mode: 0640
+  tags: 
+    - logs
+    - baseline
+
+
+  

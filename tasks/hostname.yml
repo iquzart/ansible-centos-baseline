@@ -1,0 +1,7 @@
+---
+- name:  Set hostname as {{ hostname }} 
+  hostname:
+    name: "{{ hostname }}"
+  tags: 
+    - baseline
+    - hostname

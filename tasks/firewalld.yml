@@ -1,0 +1,9 @@
+---
+- name: Security | Make sure the firewall is enabled and running
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+  tags: 
+    - firewalld
+    - baseline

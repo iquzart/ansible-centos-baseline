@@ -1,0 +1,23 @@
+---
+
+- name: Time Settings | Configure Chrony Service
+  template:
+    src: chrony.conf.j2
+    dest: /etc/chrony.conf
+    force: yes
+    backup: yes
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+      - restart chronyd
+  tags: 
+    - ntp 
+    - baseline
+  
+- name: "Time Settings | Set timezone to {{ timezone }}"
+  timezone:
+    name: "{{ timezone }}"
+  tags: 
+    - ntp 
+    - baseline

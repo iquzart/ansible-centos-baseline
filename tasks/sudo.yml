@@ -1,0 +1,13 @@
+---
+- name: sudo | Configure sudo access for System Admins and Application Admins
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: 0644
+  tags: 
+    - sudo 
+    - baseline
+
+

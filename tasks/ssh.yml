@@ -1,0 +1,23 @@
+---
+- name: SSH | Update OpenSSH package 
+  yum:
+    name: openssh
+    state: latest
+  tags: 
+    - ssh
+    - baseline
+
+- name: SSH | Configuring SSHD
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - ssh
+    - baseline
+  notify: 
+    - restart sshd
+
+

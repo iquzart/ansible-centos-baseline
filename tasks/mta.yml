@@ -1,0 +1,32 @@
+---
+
+- name: MTA | Install Postix service
+  yum:
+    name: postfix
+    state: latest
+  tags: 
+    - mta
+    - baseline
+
+- name: MTA | Enabling Postfix service on boot
+  service:
+    name: postfix
+    state: started
+    enabled: yes
+  tags: 
+    - mta
+    - baseline
+
+- name: MTA | Configuring Postfix for relay emails and inet interface
+  template:
+    src: main.cf.j2
+    dest: /etc/postfix/main.cf
+    force: yes
+    backup: yes 
+    mode: 0640
+  tags: 
+    - mta
+    - baseline
+  notify:
+    - restart postfix
+

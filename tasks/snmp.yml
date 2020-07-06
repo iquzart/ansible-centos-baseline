@@ -1,0 +1,42 @@
+---
+
+- name: SNMP | Install snmp packages
+  yum:
+    name: net-snmp
+    state: latest
+  tags: 
+    - snmp
+    - baseline
+
+- name: SNMP | Enabling the service on boot 
+  service:
+    name: snmpd
+    state: started
+    enabled: yes
+  tags: 
+    - snmp
+    - baseline
+
+- name: "SNMP | Configuring SNMP to allow access from {{ monitoring_host }}"
+  template:
+    src: snmpd.conf.j2
+    dest: /etc/snmp/snmpd.conf 
+    mode: 0640
+  tags: 
+    - snmp
+    - baseline
+  notify:
+    - restart snmpd
+
+- name: "SNMP | Configure firewalld to allow access from {{ monitoring_host }}"
+  firewalld:
+    rich_rule: "rule family=ipv4 source address={{ monitoring_host }}/32 service name=snmp accept"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  tags: 
+    - snmp
+    - baseline
+  notify:
+    - reload firewalld
+

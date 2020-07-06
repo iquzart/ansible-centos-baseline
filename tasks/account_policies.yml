@@ -1,0 +1,62 @@
+---
+- name: Account Settings | Configuring password policy
+  template:
+    src: policy/login.def.j2
+    dest: /etc/login.defs
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  tags:
+    - password_policy
+    - baseline
+
+
+- name: Account Settings | Configuring password complexity
+  template:
+    src: policy/pwquality.conf.j2
+    dest: /etc/security/pwquality.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  tags:
+    - password_policy
+    - baseline
+
+- name: "Account Settings | Set inactive password lock to {{ disable_inactive_account }} days"
+  shell: |
+    useradd -D -f "{{ disable_inactive_account }}"
+  args:
+    executable: /bin/bash
+  tags:
+    - password_policy
+    - baseline
+
+
+- name: Auth Settings | Configuring passowrd-auth
+  template: 
+    src: policy/pam.d/password-system-auth.j2
+    dest: /etc/pam.d/password-auth 
+    owner: root 
+    group: root  
+    mode: 0644 
+    backup: yes 
+  tags: 
+    - pam
+    - baseline
+
+
+- name: Auth Settings | Configuring system-auth
+  template:
+    src: policy/pam.d/password-system-auth.j2
+    dest: /etc/pam.d/system-auth
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  tags: 
+    - pam
+    - baseline
+
+

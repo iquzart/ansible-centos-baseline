@@ -1,0 +1,30 @@
+---
+# handlers file for centos-baseline
+
+- name: restart journald
+  service: name=systemd-journald state=restarted
+
+- name: restart chronyd
+  systemd:
+    name: chronyd
+    state: restarted
+
+- name: restart snmpd
+  systemd:
+    name: snmpd
+    state: restarted
+
+- name: reload firewalld
+  systemd:
+    name: firewalld
+    state: reloaded
+
+- name: restart sshd
+  systemd:
+    name: sshd
+    state: restarted
+
+- name: restart postfix
+  systemd:
+    name: postfix
+    state: restarted

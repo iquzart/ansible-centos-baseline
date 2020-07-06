@@ -1,0 +1,33 @@
+---
+# tasks file for centos-baseline
+
+- include: hostname.yml
+- include: time_settings.yml
+- include: firewalld.yml
+- include: selinux.yml
+- include: logs.yml
+- include: account_policies.yml
+- include: banner.yml
+- include: ssh.yml
+
+
+#- include: admin_accounts.yml
+# - include: sudo.yml
+
+- include: snmp.yml
+  when: enable_snmp
+
+- include: mta.yml
+  when: enable_mta
+
+- include: aliases.yml
+  when: enable_mta
+
+- name: Rebooting the machine
+  reboot:
+    reboot_timeout: 3600
+
+
+ 
+
+

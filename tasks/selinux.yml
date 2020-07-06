@@ -1,0 +1,9 @@
+---
+- name: Security | Make sure SELinux is disabled 
+  selinux:
+    policy: targeted
+    state: "{{ selinux_state }}"
+  tags: 
+    - selinux
+    - baseline
+
