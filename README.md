@@ -91,4 +91,4 @@ MIT
 Author Information
 ------------------
 
-Muhammed Iqbal <iquart@hotmail.com>
+Muhammed Iqbal <iquzart@hotmail.com>
