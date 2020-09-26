@@ -1,7 +1,7 @@
 ---
-- name:  Set hostname as {{ hostname }} 
+- name:  Set hostname as {{ inventory_hostname_short }} 
   hostname:
-    name: "{{ hostname }}"
+    name: "{{ inventory_hostname_short }}"
   tags: 
     - baseline
     - hostname
